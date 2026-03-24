@@ -1,0 +1,12 @@
+\frametitle{Python Code}
+    \begin{lstlisting}
+plt.figure(figsize=(10, 5))
+plt.plot(n, x, label=f'Input Vector (Freq w1={k})', linestyle='--', color='blue')
+plt.plot(n, y, label=f'Output Vector (Freq w2={k})', linewidth=2, color='red')
+plt.title('Matrix LTI Output: Frequency is Preserved, Amplitude/Phase are Altered')
+plt.xlabel('Sample Index (n)')
+plt.ylabel('Amplitude')
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
