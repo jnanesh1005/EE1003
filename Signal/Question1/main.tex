@@ -172,8 +172,17 @@ Therefore, statement \textbf{(d)} is mathematically proven to be true.
 
 \begin{frame}[fragile]
     \frametitle{Python Code}
-   The following script builds the algebraic impulse response, converts it to a Circulant Matrix, and verifies the eigenvector property via matrix multiplication.
+\textbf{Input:}
 
+\[
+x[n] = \sin\left(\frac{2\pi k}{N} n\right)
+\]
+
+\textbf{System:}
+
+\[
+h[n] = \{0.4,\ 0.3,\ 0.2,\ 0.1\}
+\]
 \begin{lstlisting}[language=Python]
 import numpy as np
 import matplotlib.pyplot as plt
@@ -185,19 +194,18 @@ k = 5  # Frequency: 5 cycles per window
 x = np.sin(2 * np.pi * k * n / N)
 h = np.zeros(N)
 h[0:4] = [0.4, 0.3, 0.2, 0.1] # Simple causal filter
-C = circulant(h)
-y = C @ x
-
 \end{lstlisting}
 \end{frame}
 \begin{frame}[fragile]
     \frametitle{Python Code}
     \begin{lstlisting}
+y_full = np.convolve(x, h, mode='full')
+y = y_full[:N]
 plt.figure(figsize=(10, 5))
-plt.plot(n, x, label=f'Input Vector (Freq w1={k})', linestyle='--', color='blue')
-plt.plot(n, y, label=f'Output Vector (Freq w2={k})', linewidth=2, color='red')
-plt.title('Matrix LTI Output: Frequency is Preserved, Amplitude/Phase are Altered')
-plt.xlabel('Sample Index (n)')
+plt.plot(n, x, '--', label='Input x[n]')
+plt.plot(n, y, label='Output y[n] (Direct Convolution)', linewidth=2)
+plt.title('LTI System Output using Direct Convolution')
+plt.xlabel('n')
 plt.ylabel('Amplitude')
 plt.legend()
 plt.grid(True)

@@ -1,0 +1,14 @@
+\frametitle{Python Code}
+    \begin{lstlisting}
+y_full = np.convolve(x, h, mode='full')
+y = y_full[:N]
+plt.figure(figsize=(10, 5))
+plt.plot(n, x, '--', label='Input x[n]')
+plt.plot(n, y, label='Output y[n] (Direct Convolution)', linewidth=2)
+plt.title('LTI System Output using Direct Convolution')
+plt.xlabel('n')
+plt.ylabel('Amplitude')
+plt.legend()
+plt.grid(True)
+plt.show()
+\end{lstlisting}
